@@ -15,7 +15,7 @@ else
     Stack=$1
 fi
 
-LNMP_Ver='1.7'
+LNMP_Ver='1.8'
 . lnmp.conf
 . include/main.sh
 . include/init.sh
@@ -61,6 +61,7 @@ Init_Install()
     Get_Dist_Version
     Print_Sys_Info
     Check_Hosts
+    Check_CMPT
     if [ "${CheckMirror}" != "n" ]; then
         Check_Mirror
     fi
@@ -69,6 +70,9 @@ Init_Install()
     fi
     if [ "${DISTRO}" = "Ubuntu" ]; then
         Ubuntu_Modify_Source
+    fi
+    if [ "${DISTRO}" = "CentOS" ]; then
+        CentOS6_Modify_Source
     fi
     Add_Swap
     Set_Timezone
@@ -149,6 +153,8 @@ Install_PHP()
         Install_PHP_73
     elif [ "${PHPSelect}" = "10" ]; then
         Install_PHP_74
+    elif [ "${PHPSelect}" = "11" ]; then
+        Install_PHP_80
     fi
     Clean_PHP_Src_Dir
 }

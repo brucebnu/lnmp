@@ -745,6 +745,7 @@ Add_SSL_Menu()
                 if [ "${ssl_chain}" == "" ]; then
                     Echo_Yellow "SSL Chain file will not set."
                     Conf_SSLChain="#SSLCertificateChainFile /path/to/your/chain.pem"
+                else
                     break
                 fi
             done
@@ -776,6 +777,7 @@ Install_Check_Acme.sh()
         cat >/usr/local/acme.sh/upgrade.sh<<EOF
 #!/bin/bash
 
+. "/usr/local/acme.sh/acme.sh.env"
 /usr/local/acme.sh/acme.sh --upgrade
 sed -i 's/cat "\\\$CERT_PATH"\$/#cat "\\\$CERT_PATH"/g' /usr/local/acme.sh/acme.sh
 EOF
